@@ -1,14 +1,15 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { Home, Users, UserCircle } from "lucide-react";
 import { useEffect, useState } from "react";
-import MobileTopBar from "./MobileTopBar"; // ✅ import it
+import MobileTopBar from "./MobileTopBar";
 import { InspectionPanel } from "lucide-react";
+import SplashScreen from "./SplashScreen";
 
 export default function Layout() {
   const { pathname } = useLocation();
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 768);
   const [showInstall, setShowInstall] = useState<boolean>(false);
-
+  const [showSplash, setShowSplash] = useState<boolean>(isMobile);
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -38,7 +39,9 @@ export default function Layout() {
       }
     }
   };
-
+  if (showSplash) {
+    return <SplashScreen onFinish={() => setShowSplash(false)} />;
+  }
   return (
     <>
       {/* ✅ Desktop Top Nav */}

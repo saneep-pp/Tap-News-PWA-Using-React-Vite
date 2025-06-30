@@ -19,15 +19,15 @@ export default function Users() {
   }, []);
 
   return (
-    <div className="p-4 max-w-2xl mx-auto bg-gray-100 ">
+    <div className="p-4 pt-20 max-w-6xl mx-auto ">
       <h2 className="text-2xl font-semibold text-primary mb-6 text-center">
         Users
       </h2>
-      <div className="grid gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
         {users.map((user) => (
           <div
             key={user.id}
-            className="bg-white rounded-xl shadow-md border border-gray-200 p-4 hover:shadow-lg transition"
+            className="rounded-xl shadow-md border border-gray-200 p-4 hover:shadow-lg transition w-full"
           >
             <div className="flex w-full items-center">
               <img
