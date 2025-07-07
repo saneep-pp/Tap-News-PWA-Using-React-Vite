@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Users from "./pages/Users";
+import Country from "./pages/Country";
 import Profile from "./pages/Profile";
 
 export default function App() {
@@ -26,8 +27,12 @@ export default function App() {
           element={isLoggedIn ? <Home /> : <Navigate to="/login" />}
         />
         <Route
-          path="/users"
-          element={isLoggedIn ? <Users /> : <Navigate to="/login" />}
+          path="/home"
+          element={isLoggedIn ? <Home /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/country"
+          element={isLoggedIn ? <Country /> : <Navigate to="/login" />}
         />
         <Route
           path="/profile"

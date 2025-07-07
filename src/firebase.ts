@@ -1,4 +1,3 @@
-// src/firebase.ts
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -16,26 +15,43 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
+// Initialize Firebase app
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();
 
 export const loginWithGoogle = async () => {
-  const result = await signInWithPopup(auth, provider);
-  const user = result.user;
-  if (user) {
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        name: user.displayName,
-        email: user.email,
-        photo: user.photoURL,
-      })
-    );
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    if (user) {
+      try {
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+            method: "google",
+          })
+        );
+      } catch (storageError) {
+        console.error("Failed to store user in localStorage:", storageError);
+      }
+    }
+    return user;
+  } catch (error) {
+    console.error("Google login failed:", error);
+    throw error;
   }
 };
 
 export const logoutGoogle = async () => {
-  await signOut(auth);
-  localStorage.removeItem("user");
+  try {
+    await signOut(auth);
+    localStorage.removeItem("user");
+  } catch (error) {
+    console.error("Google logout failed:", error);
+    throw error;
+  }
 };

@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Toaster, toast } from "react-hot-toast";
 import { CiUser } from "react-icons/ci";
 import { InspectionPanel } from "lucide-react";
+
 export default function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
@@ -33,19 +34,22 @@ export default function Login() {
       toast.success("✅ Login Successful!");
       setTimeout(() => {
         navigate("/");
-      }, 800); // delay navigation slightly
+      }, 800);
     } else {
-      toast.error("Invalid Creditionals!");
+      toast.error("Invalid Credentials!");
     }
   };
 
   const handleGoogleLogin = async () => {
     try {
-      await loginWithGoogle();
-      navigate("/");
-    } catch (error) {
-      console.error("Login failed", error);
-      alert("Google login failed.");
+      const user = await loginWithGoogle();
+      toast.success(`✅ Welcome, ${user.displayName || "User"}!`);
+      setTimeout(() => {
+        navigate("/");
+      }, 800);
+    } catch (error: any) {
+      console.error("Google login error:", error.code, error.message);
+      toast.error(`Google login failed: ${error.message || "Unknown error"}`);
     }
   };
 
@@ -54,9 +58,9 @@ export default function Login() {
       <Toaster position="top-center" reverseOrder={false} />
       <div className="w-full max-w-xs">
         <div className="flex w-full justify-center items-center">
-          <div className="flex p-4 rounded-sm  border-x-[#2563eb] border-y-cyan-700 ">
+          <div className="flex p-4 rounded-sm border-x-[#2563eb] border-y-cyan-700">
             <InspectionPanel size={32} color="#2563eb" />
-            <h1 className="w-full  text-center text-2xl font-bold font-mono  text-[#2563eb]">
+            <h1 className="w-full text-center text-2xl font-bold font-mono text-[#2563eb]">
               Tap-post
             </h1>
           </div>

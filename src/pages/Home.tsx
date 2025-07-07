@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 interface NewsItem {
   article_id: string;
@@ -13,6 +14,8 @@ interface NewsItem {
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [news, setNews] = useState<NewsItem[]>([]);
+  const [searchParams] = useSearchParams();
+  const country = searchParams.get("country") || "in"; // Default to India if no country is specified
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -20,7 +23,7 @@ export default function Home() {
         const response = await fetch(
           `https://newsdata.io/api/1/news?apikey=${
             import.meta.env.VITE_NEWS_API_TOKEN
-          }&q=india&language=en`
+          }&country=${country}&language=en`
         );
         const data = await response.json();
         if (data.status === "success") {
@@ -34,12 +37,13 @@ export default function Home() {
     };
 
     fetchNews();
-  }, []);
+  }, [country]); // Re-fetch news when country changes
 
   return (
-    <div className="p-4 pt-20 max-w-6xl mx-auto ">
+    <div className="p-4 pt-20 max-w-6xl mx-auto">
       <h1 className="text-2xl md:text-3xl font-bold text-center mb-6 text-blue-700">
-      Top News
+        Top News -{" "}
+        {countries.find((c) => c.code === country)?.name || "Country"}
       </h1>
 
       {loading ? (
@@ -82,3 +86,17 @@ export default function Home() {
     </div>
   );
 }
+
+// Define countries array for mapping country code to name
+const countries = [
+  { name: "India", code: "in" },
+  { name: "United States", code: "us" },
+  { name: "United Kingdom", code: "gb" },
+  { name: "Canada", code: "ca" },
+  { name: "Australia", code: "au" },
+  { name: "Germany", code: "de" },
+  { name: "France", code: "fr" },
+  { name: "Japan", code: "jp" },
+  { name: "China", code: "cn" },
+  { name: "Brazil", code: "br" },
+];

@@ -1,9 +1,10 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { Home, Users, UserCircle } from "lucide-react";
+import { Home, Users, UserCircle, MapPinHouse } from "lucide-react";
 import { useEffect, useState } from "react";
 import MobileTopBar from "./MobileTopBar";
 import { InspectionPanel } from "lucide-react";
 import SplashScreen from "./SplashScreen";
+import Country from "../pages/Country";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -54,8 +55,8 @@ export default function Layout() {
             </h1>
           </div>
           <div className="h-full flex justify-center items-center gap-5 pr-10 pt-4 ">
-            {["/", "/users", "/profile"].map((path, index) => {
-              const labels = ["Home", "Users", "Profile"];
+            {["/", "/country", "/profile"].map((path, index) => {
+              const labels = ["Home", "Country", "Profile"];
               return (
                 <Link
                   key={path}
@@ -108,7 +109,11 @@ export default function Layout() {
         <nav className="bottom-tab fixed bottom-0 w-full bg-white border-t border-gray-200 flex justify-around py-2 z-40 shadow-md">
           {[
             { to: "/", icon: <Home size={24} />, label: "Home" },
-            { to: "/users", icon: <Users size={24} />, label: "Users" },
+            {
+              to: "/country",
+              icon: <MapPinHouse size={24} />,
+              label: "Country",
+            },
             {
               to: "/profile",
               icon: <UserCircle size={24} />,
