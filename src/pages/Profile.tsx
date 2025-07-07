@@ -34,7 +34,7 @@ const Profile = () => {
       }`;
 
   return (
-    <div className="px-4 py-8 bg-gray-100 flex justify-center items-start overflow-hidden h-screen">
+    <div className="px-4   flex justify-center items-start overflow-hidden h-screen">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 md:p-8 md:h-full mt-20">
         <div className="flex flex-col items-center text-center">
           <img
