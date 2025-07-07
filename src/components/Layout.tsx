@@ -1,10 +1,9 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { Home, Users, UserCircle, MapPinHouse } from "lucide-react";
+import { Home, UserCircle, MapPinHouse } from "lucide-react";
 import { useEffect, useState } from "react";
 import MobileTopBar from "./MobileTopBar";
 import { InspectionPanel } from "lucide-react";
 import SplashScreen from "./SplashScreen";
-import Country from "../pages/Country";
 
 export default function Layout() {
   const { pathname } = useLocation();

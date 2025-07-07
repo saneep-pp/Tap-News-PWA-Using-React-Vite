@@ -1,5 +1,5 @@
 // src/components/SplashScreen.tsx
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { InspectionPanel } from "lucide-react";
 export default function SplashScreen({ onFinish }: { onFinish: () => void }) {
   useEffect(() => {

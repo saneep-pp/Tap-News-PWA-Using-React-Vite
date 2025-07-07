@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import Users from "./pages/Users";
 import Country from "./pages/Country";
 import Profile from "./pages/Profile";
 
