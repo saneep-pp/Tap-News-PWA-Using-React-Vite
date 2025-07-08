@@ -1,4 +1,3 @@
-import React from "react";
 import { InspectionPanel } from "lucide-react";
 
 const MobileTopBar = () => {

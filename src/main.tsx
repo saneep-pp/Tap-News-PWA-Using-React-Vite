@@ -13,8 +13,7 @@ createRoot(document.getElementById("root")!).render(
 // src/main.tsx
 
 window.addEventListener("beforeinstallprompt", (e) => {
-  let deferredPrompt: any;
   e.preventDefault();
-  deferredPrompt = e;
+
   localStorage.setItem("showInstallPrompt", "true");
 });
