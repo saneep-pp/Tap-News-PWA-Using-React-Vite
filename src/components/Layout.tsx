@@ -26,19 +26,22 @@ export default function Layout() {
       setShowInstall(true);
     }
   }, []);
-
   const handleInstallClick = async () => {
-    const promptEvent = (window as any).deferredPrompt;
+    const promptEvent = window.deferredPrompt;
     if (promptEvent) {
       promptEvent.prompt();
       const result = await promptEvent.userChoice;
       if (result.outcome === "accepted") {
-        console.log("PWA installed");
+        console.log("✅ PWA installed");
         localStorage.removeItem("showInstallPrompt");
         setShowInstall(false);
+        window.deferredPrompt = null;
+      } else {
+        console.log("❌ PWA install dismissed");
       }
     }
   };
+
   if (showSplash) {
     return <SplashScreen onFinish={() => setShowSplash(false)} />;
   }
